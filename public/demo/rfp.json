@@ -1,0 +1,34 @@
+{
+  "rfp_title": "VA Network Modernization – Solicitation 36C10X-25-R-1234",
+  "requirements": [
+    {"title": "Network Architecture", "description": "Provide a modernized network architecture supporting 10 Gbps connectivity across 12 VA medical centers."},
+    {"title": "Section 508 Compliance", "description": "Ensure all deliverables meet Section 508 accessibility requirements."},
+    {"title": "24/7 Monitoring", "description": "Implement continuous monitoring and incident response capabilities."},
+    {"title": "Project Timeline", "description": "Deliver initial deployment within 6 months and full rollout within 18 months."},
+    {"title": "Training Program", "description": "Develop and deliver end-user and admin training materials."},
+    {"title": "Equipment Inventory", "description": "Provide a detailed list of hardware and software required."},
+    {"title": "Disaster Recovery", "description": "Design a disaster recovery and business continuity plan."},
+    {"title": "Cybersecurity Assessment", "description": "Perform a comprehensive cybersecurity assessment and provide mitigation strategies."},
+    {"title": "IPv6 Support", "description": "Ensure all network components are IPv6 enabled and support dual stack."},
+    {"title": "Compliance Matrix", "description": "Produce a compliance matrix mapping RFP requirements to proposal sections."}
+  ],
+  "draft_outline": [
+    "Executive Summary",
+    "Technical Approach",
+    "Management and Staffing Plan",
+    "Past Performance",
+    "Risk Mitigation Strategy",
+    "Schedule and Milestones",
+    "Price Proposal"
+  ],
+  "sample_paragraphs": [
+    "Our solution uses a zero-trust architecture to safeguard sensitive VA data. By segmenting the network and enforcing strong identity and access controls, we reduce lateral movement and minimize breach impact. The design aligns with NIST SP 800-207 and supports future expansion.",
+    "We will stand up 24/7 monitoring using a combination of SIEM tools and a managed security operations center. Coupled with targeted training for VA staff, this ensures rapid detection and response to threats while building institutional knowledge."
+  ],
+  "predictor": {
+    "best_value_score": 0.87,
+    "lpta_score": 0.65,
+    "recommended": "Best Value",
+    "analysis": "Based on the complexity and focus on quality, a Best Value trade-off approach is recommended over Lowest Price Technically Acceptable."
+  }
+}
