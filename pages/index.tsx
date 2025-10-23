@@ -95,7 +95,7 @@ export default function Home() {
             I built APE because I’ve spent too many late nights manually parsing government RFPs. Our vision is to give small and mid-sized contractors a fighting chance against incumbents by automating the red tape.
           </p>
           <a
-            href="https://calendly.com/your-calendly-link"
+            href="https://calendly.com/alex26rz/30min"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-accent text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition"
