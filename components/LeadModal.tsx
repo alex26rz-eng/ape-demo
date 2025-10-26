@@ -121,3 +121,4 @@ export default function LeadModal({ open, setOpen }: LeadModalProps) {
       </div>
     </div>
   );
+}
