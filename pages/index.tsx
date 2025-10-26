@@ -7,7 +7,7 @@ import LeadModal from '../components/LeadModal';
 
 export default function Home() {
   const [open, setOpen] = useState(false);
-  const callUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/your-calendly-link';
+  const callUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/alex26rz/30min';
 
   const handleDemoStart = () => {
     if (typeof window !== 'undefined' && typeof (window as any).plausible === 'function') {
@@ -57,19 +57,22 @@ export default function Home() {
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/demo" onClick={handleDemoStart}>
-                <span className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white rounded-md shadow transition dark:bg-indigo-500 dark:hover:bg-indigo-600">
-                  Try the Demo
-                </span>
-              </Link>
-              <button
-                onClick={() => setOpen(true)}
-                className="px-6 py-3 bg-white/20 hover:bg-white/30 active:scale-95 text-indigo-600 dark:text-indigo-300 backdrop-blur border border-indigo-200 dark:border-indigo-500 rounded-md shadow transition"
-              >
-                Join Waitlist
-              </button>
-            </div>
+            <div className="mt-6 flex gap-4 justify-center">
+  <a
+    href="/demo"
+    onClick={handleDemoStart}
+    className="rounded-md bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition"
+  >
+    Try the Demo
+  </a>
+  <button
+    onClick={() => alert("You've been added and will be notified!")}
+    className="rounded-md border border-indigo-600 px-6 py-3 text-sm font-semibold text-indigo-600 hover:bg-indigo-50 transition"
+  >
+    Join Waitlist
+  </button>
+</div>
+
           </FadeIn>
         </section>
         {/* What It Does cards */}
