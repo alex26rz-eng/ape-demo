@@ -24,21 +24,19 @@ export default function LeadModal({ open, setOpen }: LeadModalProps) {
     e.preventDefault();
     setStatus('loading');
     setErrorMessage('');
+
     try {
       const { error } = await supabase
- const { error } = await supabase
         .from('waitlist_signups')
         .insert([
-          const { error } = await supabase
-  .from('waitlist_signups')
-  .insert([
-    {
-      name: company,
-      email,
-    },
-  ]);
-
+          {
+            name: company,
+            email,
+            role,
+            naics,
+          },
         ]);
+
       if (error) {
         console.error(error);
         setErrorMessage('Could not add to waitlist.');
@@ -123,4 +121,3 @@ export default function LeadModal({ open, setOpen }: LeadModalProps) {
       </div>
     </div>
   );
-}
