@@ -26,14 +26,18 @@ export default function LeadModal({ open, setOpen }: LeadModalProps) {
     setErrorMessage('');
     try {
       const { error } = await supabase
-        .from('leads')
+ const { error } = await supabase
+        .from('waitlist_signups')
         .insert([
-          {
-            email,
-            company,
-            role,
-            naics
-          }
+          const { error } = await supabase
+  .from('waitlist_signups')
+  .insert([
+    {
+      name: company,
+      email,
+    },
+  ]);
+
         ]);
       if (error) {
         console.error(error);
