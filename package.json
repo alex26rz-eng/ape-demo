@@ -18,7 +18,8 @@
     "@shadcn/ui": "latest",
     "@supabase/supabase-js": "^2.0.0",
     "framer-motion": "^10.12.16",
-    "resend": "^6.2.2"
+    "resend": "^6.2.2",
+    "@radix-ui/react-tabs": "^1.0.0"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
