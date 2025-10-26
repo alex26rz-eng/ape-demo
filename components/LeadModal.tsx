@@ -8,8 +8,6 @@ interface LeadModalProps {
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
-// Create Supabase client outside of component to avoid recreating on each render
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default function LeadModal({ open, setOpen }: LeadModalProps) {
@@ -26,16 +24,14 @@ export default function LeadModal({ open, setOpen }: LeadModalProps) {
     setErrorMessage('');
 
     try {
-      const { error } = await supabase
-        .from('waitlist_signups')
-        .insert([
-          {
-            name: company,
-            email,
-            role,
-            naics,
-          },
-        ]);
+      const { error } = await supabase.from('waitlist_signups').insert([
+        {
+          name: company,
+          email,
+          role,
+          naics,
+        },
+      ]);
 
       if (error) {
         console.error(error);
@@ -43,7 +39,6 @@ export default function LeadModal({ open, setOpen }: LeadModalProps) {
         setStatus('error');
       } else {
         setStatus('success');
-        // clear form
         setEmail('');
         setCompany('');
         setRole('');
@@ -62,10 +57,9 @@ export default function LeadModal({ open, setOpen }: LeadModalProps) {
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white p-6 rounded-lg space-y-4 w-full max-w-md">
         <h2 className="text-xl font-semibold">Join the Waitlist</h2>
+
         {status === 'success' ? (
-          <div className="text-green-600">
-            Thanks for joining! We'll be in touch.
-          </div>
+          <div className="text-green-600">Thanks for joining! We'll be in touch.</div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
@@ -103,12 +97,13 @@ export default function LeadModal({ open, setOpen }: LeadModalProps) {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="bg-accent text-white px-4 py-2 rounded hover:bg-indigo-700 transition w-full"
+              className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition w-full"
             >
               {status === 'loading' ? 'Submitting...' : 'Submit'}
             </button>
           </form>
         )}
+
         <button
           onClick={() => {
             setOpen(false);
