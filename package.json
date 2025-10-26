@@ -18,6 +18,8 @@
     "@shadcn/ui": "latest",
     "@supabase/supabase-js": "^2.0.0",
     "framer-motion": "^10.12.16"
+     "resend": "^6.2.2",
+
   },
   "devDependencies": {
     "typescript": "^5.0.0",
