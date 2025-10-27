@@ -1,39 +1,55 @@
-import { useState, useEffect } from 'react';
-import UploadCard from '../components/UploadCard';
-import ComplianceTable from '../components/ComplianceTable';
-import DraftPanel from '../components/DraftPanel';
-import PredictorCard from '../components/PredictorCard';
-
-const DEMO_MODE = true;
+import { useState } from 'react';
 
 export default function Demo() {
-  const [step, setStep] = useState<'upload' | 'compliance' | 'draft' | 'predict'>('upload');
-  const [data, setData] = useState<any>(null);
+  const [fileName, setFileName] = useState<string | null>(null);
+  const [status, setStatus] = useState<'idle' | 'uploading'>('idle');
 
-  // Fake load times for realism
-  useEffect(() => {
-    if (step !== 'upload' && DEMO_MODE && !data) {
-      fetch('/demo/rfp.json')
-        .then(res => res.json())
-        .then(json => {
-          setTimeout(() => setData(json), 1000); // 1s delay
-        });
+  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.type !== 'application/pdf') {
+      alert('Only PDF files are accepted.');
+      return;
     }
-  }, [step]);
+
+    setFileName(file.name);
+    setStatus('uploading');
+  };
 
   return (
-    <div className="min-h-screen p-8 space-y-8">
-      {step === 'upload' && (
-        <UploadCard onNext={() => setStep('compliance')} />
+    <div className="flex flex-col items-center justify-center min-h-screen p-6 text-center">
+      {status === 'idle' && (
+        <div className="space-y-4">
+          <h1 className="text-2xl font-semibold">Upload RFP</h1>
+          <input
+            type="file"
+            accept="application/pdf"
+            onChange={handleUpload}
+            className="p-2 border rounded"
+          />
+          <button
+            onClick={() => setStatus('uploading')}
+            className="bg-blue-600 text-white px-4 py-2 rounded"
+          >
+            Use Demo
+          </button>
+          <p className="text-gray-500 text-sm">
+            DEMO_MODE is on: using sample RFP.
+          </p>
+        </div>
       )}
-      {step === 'compliance' && data && (
-        <ComplianceTable data={data.requirements} onNext={() => setStep('draft')} />
-      )}
-      {step === 'draft' && data && (
-        <DraftPanel outline={data.draft_outline} paragraphs={data.sample_paragraphs} onNext={() => setStep('predict')} />
-      )}
-      {step === 'predict' && data && (
-        <PredictorCard predictor={data.predictor} />
+
+      {status === 'uploading' && (
+        <div className="space-y-3 animate-pulse">
+          <h2 className="text-xl font-semibold">Analyzing RFP…</h2>
+          <p className="text-gray-600">
+            {fileName ? `Processing ${fileName}` : 'Preparing analysis'}
+          </p>
+          <p className="text-gray-500 text-sm">
+            This may take several minutes as our AI reviews compliance, scoring and structure.
+          </p>
+        </div>
       )}
     </div>
   );
