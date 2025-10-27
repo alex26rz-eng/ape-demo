@@ -1,12 +1,21 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 interface LeadModalProps {
-  onClose: () => void;
+  open: boolean;
+  setOpen: (open: boolean) => void;
 }
 
-export default function LeadModal({ onClose }: LeadModalProps) {
+export default function LeadModal({ open, setOpen }: LeadModalProps) {
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '' });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    company: "",
+    role: "",
+    naics: "",
+  });
+
+  if (!open) return null;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -14,40 +23,54 @@ export default function LeadModal({ onClose }: LeadModalProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // You could fake an API call here with a timeout if you want to simulate processing.
-    setSubmitted(true);
+    setSubmitted(true); // fake submission
   };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
-      <div className="bg-white p-6 rounded shadow-md max-w-sm w-full">
+      <div className="bg-white p-6 rounded shadow-md max-w-sm w-full text-center">
         {!submitted ? (
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3">
             <h2 className="text-xl font-semibold">Join the Waitlist</h2>
 
-            <div>
-              <label className="block text-sm mb-1">Name</label>
-              <input
-                type="text"
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                className="w-full border p-2 rounded"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm mb-1">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                className="w-full border p-2 rounded"
-                required
-              />
-            </div>
+            <input
+              name="name"
+              placeholder="Full Name"
+              value={form.name}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+              required
+            />
+            <input
+              name="email"
+              placeholder="Email"
+              type="email"
+              value={form.email}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+              required
+            />
+            <input
+              name="company"
+              placeholder="Company"
+              value={form.company}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            />
+            <input
+              name="role"
+              placeholder="Role / Title"
+              value={form.role}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            />
+            <input
+              name="naics"
+              placeholder="NAICS Code (optional)"
+              value={form.naics}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            />
 
             <button
               type="submit"
@@ -57,14 +80,14 @@ export default function LeadModal({ onClose }: LeadModalProps) {
             </button>
           </form>
         ) : (
-          <div className="text-center space-y-4">
-            <h2 className="text-xl font-semibold">You’re in!</h2>
+          <div className="space-y-3">
+            <h2 className="text-xl font-semibold">You’re In!</h2>
             <p>
-              Thanks {form.name || 'friend'}, we’ve added you to the waitlist. We’ll be in touch.
+              Thanks {form.name || "there"}, you’ve been added to the waitlist.
             </p>
             <button
-              onClick={onClose}
-              className="bg-gray-700 text-white px-4 py-2 rounded"
+              onClick={() => setOpen(false)}
+              className="bg-gray-700 text-white px-4 py-2 rounded w-full"
             >
               Close
             </button>
